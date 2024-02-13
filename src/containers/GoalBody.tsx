@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, createContext } from 'react';
 import { Container, Grid, Typography, Paper } from '@mui/material';
 import{ styled } from '@mui/material/styles';
 import ListAltIcon from '@mui/icons-material/ListAlt';
@@ -15,11 +15,22 @@ const DemoPaper = styled(Paper)(({theme}) => ({
 
 export default function GoalBody() {
   let goalList: Goal[] = [];
+  let previousId = -1;
 
   let [goalData, updateGoalList] = useState(goalList);
 
+  if (goalData.length > 0) {
+    previousId = goalData[goalData.length - 1]["id"]
+  }
+
   function addGoalToList (goal: Goal): void {
-    let updatedGoalData: Goal[] = [...goalList, goal]
+    let updatedGoalData: Goal[] = [...goalData, goal]
+    
+    updateGoalList(updatedGoalData);
+  }
+
+  function deleteGoalFromList (id: number): void {
+    let updatedGoalData: Goal[] = goalData.filter((goal: Goal) => goal.id != id)
     
     updateGoalList(updatedGoalData);
   }
@@ -33,9 +44,15 @@ export default function GoalBody() {
               <Typography variant="h4" color={'white'}>
                 Course Goals
               </Typography>
-            </Grid>                 
-            <GoalForm />              
-            <GoalList />
+            </Grid>    
+            <GoalForm 
+              addGoalToList={addGoalToList} 
+              prevId={previousId} 
+            />  
+            <GoalList 
+              goalList={goalData}
+              deleteGoalFromList= {deleteGoalFromList}
+            />
           </Grid>
         </DemoPaper>   
       </Container>
