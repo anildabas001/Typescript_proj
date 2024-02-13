@@ -1,3 +1,6 @@
+# Sample:
+![image](https://github.com/anildabas001/Typescript_proj/assets/48681885/205a121b-c5e0-4c46-8afe-3f36ca96ec0a)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
