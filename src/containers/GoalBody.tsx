@@ -14,10 +14,9 @@ const DemoPaper = styled(Paper)(({theme}) => ({
 }));
 
 export default function GoalBody() {
-  let goalList: Goal[] = [];
   let previousId = -1;
 
-  let [goalData, updateGoalList] = useState(goalList);
+  let [goalData, updateGoalList] = useState<Goal[]>([]);
 
   if (goalData.length > 0) {
     previousId = goalData[goalData.length - 1]["id"]
