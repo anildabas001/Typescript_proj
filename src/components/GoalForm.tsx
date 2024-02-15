@@ -1,19 +1,20 @@
-import React, { useContext, useState } from 'react';
+import React, { type FormEvent, useState } from 'react';
 import { Goal } from '../TypeDefinitions/typeDefinition';
 import { TextField, Button, Grid } from '@mui/material';
 
+type TextInput = {value: string; error: boolean; errorMessage: string;};
 
 export default function GoalForm(props: {addGoalToList: (goal: Goal) => void; prevId: number;}) {
 
-    let [goal, updateGoal] = useState({value: '', error: false, errorMessage: ''});
-    let [description, updateDescription] = useState({value: '', error: false, errorMessage: ''});
+    let [goal, updateGoal] = useState<TextInput>({value: '', error: false, errorMessage: ''});
+    let [description, updateDescription] = useState<TextInput>({value: '', error: false, errorMessage: ''});
 
     function clearForm () {
         updateGoal({value: '', error: false, errorMessage: ''});
         updateDescription({value: '', error: false, errorMessage: ''});
     }
 
-    function submitGoal (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+    function submitGoal (event: FormEvent): void {
         let formValid = true;
         if (goal.value === '') {
             updateGoal({value: '', error: true, errorMessage: 'Please enter the Goal.'});
